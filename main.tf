@@ -2,8 +2,8 @@
 terraform {
     required_providers {
         azurerm = {
-            source = "hashicorp/azurerm"
-            version = "=3.43.0"
+            source = "azurerm"
+            version = "~>3.43.0"
             }
         }
     }
@@ -16,11 +16,11 @@ terraform {
 # Create a resource group
 resource "azurerm_resource_group" "myrg" {
     name = "stevew-rg"
-    location = "East US"
+    location = "eastus"
 }
 
 # Create a virtual network within the resource group
-resource "azurevm_virtual_network" "myvnet" {
+resource "azurerm_virtual_network" "myvnet" {
     name                         = "stevewhite-vnet"
     resource_group_name          = azurerm_resource_group.myrg.name
     location                     = azurerm_resource_group.myrg.location
@@ -28,7 +28,7 @@ resource "azurevm_virtual_network" "myvnet" {
 }
 
 # Create a subnet within the vnet
-resource "azurevm_subnet" "mysubnet" {
+resource "azurerm_subnet" "mysubnet" {
     name                         = "stevewhite-subnet"
     resource_group_name          = azurerm_resource_group.myrg.name
     virtual_network_name         = azurerm_virtual_network.myvnet.name
